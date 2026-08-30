@@ -102,7 +102,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { AvatarFramePicker } from "@/components/studio/AvatarFramePicker";
-import { VERIFIED_STRUCTURE_MESSAGE, verifiedHandleSuggestionList } from "@/lib/verified-handle";
+import { VERIFIED_STRUCTURE_MESSAGE } from "@/lib/verified-handle";
+import { VerifiedHandleBuilder } from "@/components/settings/VerifiedHandleBuilder";
 import { FavoritesEditor } from "@/components/dashboard/FavoritesEditor";
 import { MAX_FAVORITES } from "@/lib/favorites";
 import { FaviconUploader } from "@/components/studio/FaviconUploader";
