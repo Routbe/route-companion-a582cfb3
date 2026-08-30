@@ -660,11 +660,18 @@ export function ProfileEditor() {
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="min-w-0 space-y-4">
           {tab === "links" && (
-            <>
-              <ConversionCoach blocks={blocks} />
-
+            <Accordion type="single" collapsible className="space-y-3">
+              <AccordionItem
+                value="profile_info"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">👤 Profiel Basisinformatie</span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
               {/* Permanent Profile Info Card */}
               <section className="space-y-4 rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <h2 className="text-lg font-medium">Profile Info</h2>
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                   <div className="w-full sm:max-w-xs">
