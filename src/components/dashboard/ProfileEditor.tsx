@@ -1751,13 +1751,39 @@ export function ProfileEditor() {
           )}
 
           {tab === "identity" && verified && (
-            <>
-              <SubdomainPanel />
-              <EmailForwardingPanel />
-              <EmailAliasDomains />
-              <BlueskyWizard />
-            </>
+            <Accordion type="single" collapsible className="space-y-3">
+              <AccordionItem
+                value="subdomain_settings"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🌐 Subdomeinen &amp; Custom Domains
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <SubdomainPanel />
+                  <EmailForwardingPanel />
+                  <EmailAliasDomains />
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem
+                value="bluesky_did"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🦋 Bluesky DID &amp; Identity Protocol
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <BlueskyWizard />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           )}
+
 
         </div>
 
