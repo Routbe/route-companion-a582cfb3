@@ -102,7 +102,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { AvatarFramePicker } from "@/components/studio/AvatarFramePicker";
-import { VERIFIED_STRUCTURE_MESSAGE, verifiedHandleSuggestionList } from "@/lib/verified-handle";
+import { VERIFIED_STRUCTURE_MESSAGE } from "@/lib/verified-handle";
+import { VerifiedHandleBuilder } from "@/components/settings/VerifiedHandleBuilder";
 import { FavoritesEditor } from "@/components/dashboard/FavoritesEditor";
 import { MAX_FAVORITES } from "@/lib/favorites";
 import { FaviconUploader } from "@/components/studio/FaviconUploader";
@@ -1649,20 +1650,13 @@ export function ProfileEditor() {
                     )}
                   </p>
                 )}
-                {verified && !handleOk && verifiedHandleSuggestionList(legalName).length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {verifiedHandleSuggestionList(legalName)
-                      .slice(0, 8)
-                      .map((suggestion) => (
-                        <button
-                          key={suggestion}
-                          type="button"
-                          className="rounded-full border border-border px-2 py-1 font-mono text-xs hover:bg-muted"
-                          onClick={() => setHandle(suggestion)}
-                        >
-                          {suggestion}
-                        </button>
-                      ))}
+                {verified && (
+                  <div className="mt-4">
+                    <VerifiedHandleBuilder
+                      legalName={legalName}
+                      hostPrefix={`${host}${styledProfilePath("", urlStyle)}`}
+                      onSelect={(next) => setHandle(next)}
+                    />
                   </div>
                 )}
               </section>
