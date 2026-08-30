@@ -719,8 +719,27 @@ export function ProfileEditor() {
                   </button>
                 </div>
               </section>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem
+                value="components_list"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="flex flex-1 items-center justify-between gap-3 pr-2">
+                    <span className="text-base font-medium">
+                      🔗 Links &amp; Inhoudscomponenten
+                    </span>
+                    <span className="rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
+                      {blocks.filter((b) => !b.hidden).length} zichtbaar
+                    </span>
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
 
               <section className="space-y-3 rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-medium">Components</h2>
                   <span className="text-[11px] text-muted-foreground">
