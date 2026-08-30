@@ -232,6 +232,19 @@ export function ProfileEditor() {
   const [cat, setCat] = useState<string>("featured");
   /** Live view: realistisch telefoonframe of breed desktopvenster. */
   const [previewDevice, setPreviewDevice] = useState<"mobile" | "desktop">("mobile");
+  /** Desktopscherm: werkelijke containerbreedte → schaalfactor voor het 1280px-virtuele viewport. */
+  const laptopScreenRef = useRef<HTMLDivElement>(null);
+  const [laptopScale, setLaptopScale] = useState(0.3);
+  useEffect(() => {
+    if (previewDevice !== "desktop") return;
+    const el = laptopScreenRef.current;
+    if (!el) return;
+    const update = () => setLaptopScale(el.clientWidth / 1280);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [previewDevice]);
 
   const [openBlock, setOpenBlock] = useState<string | null>(null);
   const [stats, setStats] = useState<{ qrs: number; scans: number } | null>(null);
