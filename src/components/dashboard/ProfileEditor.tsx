@@ -1746,9 +1746,11 @@ export function ProfileEditor() {
                 verified={verified}
               />
               {!verified && <VerificationPanel />}
-
-            </>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           )}
+
 
           {tab === "identity" && verified && (
             <Accordion type="single" collapsible className="space-y-3">
