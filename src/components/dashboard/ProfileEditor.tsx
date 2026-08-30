@@ -1478,8 +1478,19 @@ export function ProfileEditor() {
           )}
 
           {tab === "settings" && (
-            <>
+            <Accordion type="single" collapsible className="space-y-3">
+              <AccordionItem
+                value="account_billing"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    💳 Account, Data &amp; Facturatie
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
               <section className="space-y-3 rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <h2 className="text-lg font-medium">Betalingen, data &amp; domein</h2>
                 <p className="text-sm text-muted-foreground">
                   Facturen, betaalmethodes, data-export en je eigen domein staan nu bij je
