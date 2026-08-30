@@ -1502,15 +1502,40 @@ export function ProfileEditor() {
                 <div className="h-px bg-border" />
                 <VerifiedBadgeCard verified={verified} handle={handle || null} />
               </section>
+                </AccordionContent>
+              </AccordionItem>
 
-              <SocialSharingCard
-                handle={handle || null}
-                displayName={displayName}
-                prefs={prefs}
-                setPref={setPref}
-              />
+              <AccordionItem
+                value="seo_sharing"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🏷️ Social Sharing &amp; SEO Metadata
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <SocialSharingCard
+                    handle={handle || null}
+                    displayName={displayName}
+                    prefs={prefs}
+                    setPref={setPref}
+                  />
+                </AccordionContent>
+              </AccordionItem>
 
+              <AccordionItem
+                value="identity_badges"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🛡️ Identiteitsverificatie &amp; ROUT Badges
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
               <section className="rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <h2 className="text-lg font-medium">Handle & Identifier</h2>
                 <p id="handle-help" className="mt-1 text-xs text-muted-foreground">
                   {handleRuleHint(handleCtx)}
