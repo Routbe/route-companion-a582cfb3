@@ -109,6 +109,14 @@ import {
 import { parseRoutReference } from "@/lib/reference-parser";
 import { AdminOverviewPanel } from "@/components/admin/AdminOverviewPanel";
 import { EnvHealthPanel } from "@/components/admin/EnvHealthPanel";
+import { NewsletterSyncPanel } from "@/components/admin/NewsletterSyncPanel";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 
 
 import type { UserSegment } from "@/lib/admin-segments";
