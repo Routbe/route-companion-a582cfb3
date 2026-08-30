@@ -170,7 +170,9 @@ export function ProfileMenu() {
               <DropdownMenuItem
                 onClick={() => {
                   select("verified");
-                  nav(verifiedPath);
+                  // Beheer eerst: stuur naar de Profile Hub Studio, niet naar de
+                  // publieke pagina. De publieke URL blijft zichtbaar als hint.
+                  nav("/studio");
                 }}
                 className="gap-2"
               >
@@ -191,7 +193,7 @@ export function ProfileMenu() {
               <DropdownMenuItem
                 onClick={() => {
                   select("alias");
-                  nav(aliasPath);
+                  nav("/studio");
                 }}
                 className="gap-2"
               >

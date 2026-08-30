@@ -109,6 +109,14 @@ import {
 import { parseRoutReference } from "@/lib/reference-parser";
 import { AdminOverviewPanel } from "@/components/admin/AdminOverviewPanel";
 import { EnvHealthPanel } from "@/components/admin/EnvHealthPanel";
+import { NewsletterSyncPanel } from "@/components/admin/NewsletterSyncPanel";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 
 
 import type { UserSegment } from "@/lib/admin-segments";
@@ -1291,8 +1299,33 @@ export default function Admin() {
           </section>
         ) : null}
 
-        <AdminOverviewPanel />
-        <EnvHealthPanel />
+        <Accordion type="single" collapsible className="space-y-3">
+          <AccordionItem
+            value="system_health"
+            className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+          >
+            <AccordionTrigger className="hover:no-underline">
+              <span className="text-base font-medium">🩺 Systeemstatus &amp; Diagnostiek</span>
+            </AccordionTrigger>
+            <AccordionContent className="space-y-4 pb-5">
+              <AdminOverviewPanel />
+              <EnvHealthPanel />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem
+            value="newsletter_sync"
+            className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+          >
+            <AccordionTrigger className="hover:no-underline">
+              <span className="text-base font-medium">📧 Nieuwsbrief &amp; Brevo-synchronisatie</span>
+            </AccordionTrigger>
+            <AccordionContent className="pb-5">
+              <NewsletterSyncPanel />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+
 
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">

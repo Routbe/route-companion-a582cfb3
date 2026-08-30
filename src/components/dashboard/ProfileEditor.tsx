@@ -660,11 +660,18 @@ export function ProfileEditor() {
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="min-w-0 space-y-4">
           {tab === "links" && (
-            <>
-              <ConversionCoach blocks={blocks} />
-
+            <Accordion type="single" collapsible className="space-y-3">
+              <AccordionItem
+                value="profile_info"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">👤 Profiel Basisinformatie</span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
               {/* Permanent Profile Info Card */}
               <section className="space-y-4 rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <h2 className="text-lg font-medium">Profile Info</h2>
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                   <div className="w-full sm:max-w-xs">
@@ -719,8 +726,27 @@ export function ProfileEditor() {
                   </button>
                 </div>
               </section>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem
+                value="components_list"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="flex flex-1 items-center justify-between gap-3 pr-2">
+                    <span className="text-base font-medium">
+                      🔗 Links &amp; Inhoudscomponenten
+                    </span>
+                    <span className="rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
+                      {blocks.filter((b) => !b.hidden).length} zichtbaar
+                    </span>
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
 
               <section className="space-y-3 rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-medium">Components</h2>
                   <span className="text-[11px] text-muted-foreground">
@@ -962,8 +988,25 @@ export function ProfileEditor() {
 
               <BadgesPanel />
               <BadgeActivityPanel />
-            </>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem
+                value="conversion_tips"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    💡 Conversie Coach &amp; Optimalisatie
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <ConversionCoach blocks={blocks} />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           )}
+
 
           {tab === "design" && (
             <Accordion
@@ -1478,8 +1521,19 @@ export function ProfileEditor() {
           )}
 
           {tab === "settings" && (
-            <>
+            <Accordion type="single" collapsible className="space-y-3">
+              <AccordionItem
+                value="account_billing"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    💳 Account, Data &amp; Facturatie
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
               <section className="space-y-3 rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <h2 className="text-lg font-medium">Betalingen, data &amp; domein</h2>
                 <p className="text-sm text-muted-foreground">
                   Facturen, betaalmethodes, data-export en je eigen domein staan nu bij je
@@ -1502,15 +1556,40 @@ export function ProfileEditor() {
                 <div className="h-px bg-border" />
                 <VerifiedBadgeCard verified={verified} handle={handle || null} />
               </section>
+                </AccordionContent>
+              </AccordionItem>
 
-              <SocialSharingCard
-                handle={handle || null}
-                displayName={displayName}
-                prefs={prefs}
-                setPref={setPref}
-              />
+              <AccordionItem
+                value="seo_sharing"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🏷️ Social Sharing &amp; SEO Metadata
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <SocialSharingCard
+                    handle={handle || null}
+                    displayName={displayName}
+                    prefs={prefs}
+                    setPref={setPref}
+                  />
+                </AccordionContent>
+              </AccordionItem>
 
+              <AccordionItem
+                value="identity_badges"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🛡️ Identiteitsverificatie &amp; ROUT Badges
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
               <section className="rounded-2xl border border-border bg-card p-4 sm:p-5">
+
                 <h2 className="text-lg font-medium">Handle & Identifier</h2>
                 <p id="handle-help" className="mt-1 text-xs text-muted-foreground">
                   {handleRuleHint(handleCtx)}
@@ -1746,24 +1825,52 @@ export function ProfileEditor() {
                 verified={verified}
               />
               {!verified && <VerificationPanel />}
-
-            </>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           )}
+
 
           {tab === "identity" && verified && (
-            <>
-              <SubdomainPanel />
-              <EmailForwardingPanel />
-              <EmailAliasDomains />
-              <BlueskyWizard />
-            </>
+            <Accordion type="single" collapsible className="space-y-3">
+              <AccordionItem
+                value="subdomain_settings"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🌐 Subdomeinen &amp; Custom Domains
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <SubdomainPanel />
+                  <EmailForwardingPanel />
+                  <EmailAliasDomains />
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem
+                value="bluesky_did"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    🦋 Bluesky DID &amp; Identity Protocol
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <BlueskyWizard />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           )}
+
 
         </div>
 
         
         {/* Live preview — desktop: pinned next to the editor, altijd ónder de vaste header (z-10 < z-50) */}
-        <aside className="z-10 hidden lg:sticky lg:top-24 lg:block lg:h-[calc(100vh-7rem)] lg:overflow-hidden">
+        <aside className="z-10 hidden lg:sticky lg:top-4 lg:block lg:h-[calc(100vh-2rem)] lg:overflow-hidden">
 
           <div className="mb-2 flex items-center justify-between gap-2">
             <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
