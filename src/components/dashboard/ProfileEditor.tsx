@@ -962,8 +962,25 @@ export function ProfileEditor() {
 
               <BadgesPanel />
               <BadgeActivityPanel />
-            </>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem
+                value="conversion_tips"
+                className="rounded-2xl border border-border bg-card px-4 sm:px-5"
+              >
+                <AccordionTrigger className="hover:no-underline">
+                  <span className="text-base font-medium">
+                    💡 Conversie Coach &amp; Optimalisatie
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 pb-5">
+                  <ConversionCoach blocks={blocks} />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           )}
+
 
           {tab === "design" && (
             <Accordion
