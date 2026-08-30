@@ -232,6 +232,19 @@ export function ProfileEditor() {
   const [cat, setCat] = useState<string>("featured");
   /** Live view: realistisch telefoonframe of breed desktopvenster. */
   const [previewDevice, setPreviewDevice] = useState<"mobile" | "desktop">("mobile");
+  /** Desktopscherm: werkelijke containerbreedte → schaalfactor voor het 1280px-virtuele viewport. */
+  const laptopScreenRef = useRef<HTMLDivElement>(null);
+  const [laptopScale, setLaptopScale] = useState(0.3);
+  useEffect(() => {
+    if (previewDevice !== "desktop") return;
+    const el = laptopScreenRef.current;
+    if (!el) return;
+    const update = () => setLaptopScale(el.clientWidth / 1280);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [previewDevice]);
 
   const [openBlock, setOpenBlock] = useState<string | null>(null);
   const [stats, setStats] = useState<{ qrs: number; scans: number } | null>(null);
@@ -1923,16 +1936,29 @@ export function ProfileEditor() {
               </div>
             </div>
           ) : (
-            /* Laptop: metalen bezel met webcamstip, hinge en 3D-toetsenborddek */
+            /* Laptop: ultradunne metalen bezel met webcamstip, glasglans, hinge en 3D-toetsenborddek */
             <div className="mx-auto w-full max-w-[520px] px-8 transition-all duration-300">
-              {/* Scherm */}
-              <div className="relative rounded-t-2xl border border-zinc-700/80 bg-zinc-900 p-2.5 pt-4 shadow-2xl shadow-black/60">
-                <span className="absolute left-1/2 top-1.5 h-1 w-1 -translate-x-1/2 rounded-full bg-zinc-500" aria-hidden />
-                <div className="preview-noscroll aspect-[16/10] w-full overflow-hidden overflow-y-auto rounded-[4px] bg-background text-foreground">
-                  {/* 1:1 desktopproporties: render op 1280px en zoom mee met de kaart */}
-                  <div className="w-[1280px] origin-top-left" style={{ zoom: 0.26 }}>
+              {/* Scherm: 16:10 retina-paneel, dunne bezel, ambient glow */}
+              <div className="relative rounded-t-xl border-[2px] border-zinc-700/60 bg-zinc-950 p-1.5 shadow-2xl shadow-black/60 shadow-[0_0_30px_rgba(255,255,255,0.04)]">
+                {/* Webcamstip gecentreerd in de bovenbezel */}
+                <span className="mx-auto my-0.5 block h-1.5 w-1.5 rounded-full bg-zinc-800" aria-hidden />
+                <div
+                  ref={laptopScreenRef}
+                  className="preview-noscroll relative aspect-[16/10] w-full overflow-hidden rounded-[4px] bg-background text-foreground"
+                >
+                  {/* 1:1 desktopproporties: render in virtueel 1280×800-viewport en schaal
+                      mee met de werkelijke containerbreedte via CSS-transform */}
+                  <div
+                    className="h-[800px] w-[1280px] origin-top-left"
+                    style={{ transform: `scale(${laptopScale})` }}
+                  >
                     <ProfileView profile={previewDraft} free={!verified} layout="wide" />
                   </div>
+                  {/* Diagonale glasglans over het scherm */}
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent"
+                    aria-hidden
+                  />
                 </div>
               </div>
               {/* Hinge: donkere metalen balk tussen scherm en dek */}
